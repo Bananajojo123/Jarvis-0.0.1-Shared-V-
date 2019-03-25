@@ -251,6 +251,25 @@ def assistant(command):
 
         elif 'dandy\'s favorite' in command:
             talkToMe('Dandy\'s favorite student is Jason. He also likes Aaron equally as much.')
+
+        elif 'play' in command:
+			directory = "/media/pi/8891-D645/"
+			movies = {}
+			moviesList = []
+			filetypes = ["mp4","mp3"]
+			print(os.listdir(directory))
+			for movie in os.listdir(directory):
+				if(movie.split(".")[1] in filetypes):
+					print(movie.split(".")[1])
+					pathToMovie = directory+movie
+					movies[movie.split('.')[0]] = pathToMovie
+					moviesList.append(movie.split('.')[0])
+			movieToPlay = command.split("play")[1]
+			if(movieToPlay in moviesList):
+				os.system(movies[movieToPlay])
+			else:
+				talkToMe('That does not exist sir')
+
         else:
                 talkToMe('I don\'t know what you mean!')
         # elif 'alarm' in command:
