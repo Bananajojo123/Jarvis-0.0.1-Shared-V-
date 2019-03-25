@@ -21,8 +21,6 @@ import pyaudio
 import wave
 import requests
 import geocoder
-import encode_faces.py
-import pi_face_recognition.py
 # import alarmJ
 
 engine = pyttsx3.init()
@@ -232,43 +230,28 @@ def assistant(command):
             else:
                 talkToMe('oops!I ran out of jokes')
 
-        elif 'weather in' in command:
-            reg_ex = re.search('weather in (.*)', command)
-            if reg_ex:
-                city = reg_ex.group(1)
-                weather = Weather()
-                location = geolocator.geocode(city)
-                placeweather = location.latitude, location.longitude
-                #Get weather
-                observation = owm.weather_at_place(city)
-                w = observation.get_weather()
-                currentTemperature = w.get_temperature('celsius')
-                tempCelsius = int(currentTemperature['temp']) * 1.8
-                tempFahrenheit = tempCelsius + 32
-                tempFahrenheit = str(tempFahrenheit)
-                talkToMe("It is "+tempFahrenheit + " degrees Fahrenheit")
-                print ("It is "+tempFahrenheit + " degrees Fahrenheit")
+        # elif 'weather in' in command:
+        #     reg_ex = re.search('weather in (.*)', command)
+        #     if reg_ex:
+        #         city = reg_ex.group(1)
+        #         weather = Weather()
+        #         location = geolocator.geocode(city)
+        #         placeweather = location.latitude, location.longitude
+        #         #Get weather
+        #         observation = owm.weather_at_place(city)
+        #         w = observation.get_weather()
+        #         currentTemperature = w.get_temperature('celsius')
+        #         tempCelsius = int(currentTemperature['temp']) * 1.8
+        #         tempFahrenheit = tempCelsius + 32
+        #         tempFahrenheit = str(tempFahrenheit)
+        #         talkToMe("It is "+tempFahrenheit + " degrees Fahrenheit")
+        #         print ("It is "+tempFahrenheit + " degrees Fahrenheit")
 
         #elif 'lockdown in command:
 
-        elif 'identify'
-            python encode_faces.py --dataset dataset --encodings encodings.pickle \  --detection-method hog
-            python pi_face_recognition.py --cascade haarcascade_frontalface_default.xml \  --encodings encodings.pickle
-            talkToMe('Displaying results')
-
         elif 'dandy\'s favorite' in command:
-            talkToMe('Dandy\'s favorite student is jason.')
-        elif 'weather forecast in' in command:
-            reg_ex = re.search('weather forecast in (.*)', command)
-            if reg_ex:
-                city = reg_ex.group(1)
-                weather = Weather()
-                location = weather.lookup_by_location(city)
-                forecasts = location.forecast()
-                for i in range(0,3):
-                    talkToMe('On %s will it %s. The maximum temperture will be %.1f degree.'
-                             'The lowest temperature will be %.1f degrees.' % (forecasts[i].date(), forecasts[i].text(), (int(forecasts[i].high())-32)/1.8, (int(forecasts[i].low())-32)/1.8))
-            else:
+            talkToMe('Dandy\'s favorite student is Jason. He also likes Aaron equally as much.')
+        else:
                 talkToMe('I don\'t know what you mean!')
         # elif 'alarm' in command:
         #     reg_ex = re.search('an alarm for (.*)', command)
